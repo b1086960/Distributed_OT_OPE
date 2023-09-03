@@ -17,9 +17,9 @@ The results are exported to the folder results, where each experiment's outputs 
 
 Guidelines for running an MPC protocol in "Multi-Threading" mode:
 Code examples in "Multi-Threading" can be found at folder "run" under file with the protocol name.
-For example for OPE, in folder "run" under file "OPE" ( function "main"), An example of how to use OPE between alice and Bob appears.
-You can change Bob's vector to see how the DVV process works. For example in run/OPE change Bob vector values
-{1,10,100,1000,10000,100000}. If you select an invalid value, for example: {1,10,101,1000,10000,100000} you will get an error from the DVV process: "validation failed: entry 2 in Bob Vector isent b(n)=b(n-1)*b(2)".
+For example for OPE in folder "run" under file "OPE" ( function "main") you can see example of how to run OPE.
+You can change Bob's vector to see how the DVV process works. For example: in the file run/OPE change Bob The legal vector value
+{1,10,100,1000,10000,100000} to illegal one. If you select an illegal vector, for example: {1,10,101,1000,10000,100000}, you will get an error from the DVV process: "validation failed: entry 2 in Bob Vector isent b(n)=b(n-1)*b(2)".
 
 How to run the code separately for Alice and Bob:
 Since this code simulates each of the protocols it does not separate Alice and Bob Code, and it also add validation to see the protocols works. 
