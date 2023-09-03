@@ -24,13 +24,20 @@ You can change Bob's vector to see how the DVV process works. For example: in th
 How to run the code separately for Alice and Bob:
 Since this code simulates each of the protocols it does not separate Alice and Bob Code, and it also add validation to see the protocols works. 
 Here are instructions on how to run each protocol separately for Alice and Bob:
+
 (1)DSP: Servers: "DSP_Server", Alice use the "share_vector" ("DSP" file, folder "run") to share her vector with the servers, Bob use "share_vector" to share his vector. and "recoverSecretFromservers" ("DSP" file, folder "run") to recover the inner product result.
+
 (2)OT1: Servers: "OT1_Server", no change for alice and bob.
+
 (3)OTK: Servers: "OTK_Server", no change for Alice, Bob use "recoverSecretFromkservers" ("OTK" file, folder "run") instead of "recoverSecretFromservers" to recover k secrets.
+
 (4)POT: Servers: "POT_Server", Alice use "share_vector" for her vector, then "share_prices" ("POT" file, folder "run") for her prices, 
 then "share_treshold" ("POT" file, folder "run") for her treshold. Bob use "share_vector" for his vector, then "share_treshold" for his treshold, then "recoverSecretFromkservers" to recover his massages.
+
 (5)GOT  Servers: "GOT_Server", Alice use "generate_p_and_q" to generate q,p. Then she pick random number S^B (line 210, "GOT" file, folder "run"). Then she share S^A with the servers using "share_secretS" ("GOT" file, folder "run"), then she create shares of S^A according to her access structure using the function "generate_S_keys" ("GOT" file, folder "run"). Lastly she use the functions "encryptedAliceVector" and "AddShares" ("GOT" file, folder "run") to encrypted her vector and add the shares of S^A according to the access structure, and share the result using "share_vector". Bob use "share_vector" for his vector. and then compute the inner product result using "recoverSecretFromkservers". Bob then use "recoverSfromEncryptedVector" ("GOT" file, folder "run") to recover S^B. Bob use "share_secretS" to share S^B with the servers, and "pre_encryption_keys" ("GOT_Server" file, "servers" folder) to tell them to check if S^B==S^A. If S^B==S^A , Bob can get the encryptions keys using "get_encryption_keys" ("GOT" file, folder "run"), and decrypt the result by subtractions (example: line 131, "OTK" file, "run" folder).
+
 (6)OPE  Servers: "OPE_Server",   same as "OT1" (different DVV process).
+
 (7)OMPE Servers: "OMPE_Server",  same as "OT1" (different DVV process).			  
 				  
 
