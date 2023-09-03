@@ -90,8 +90,8 @@ public class Measure_times {
 			// Alice shares prices
 			
 			// Alice and bob send treshold to servers 
-			POT.share_treshold(BigInteger.valueOf(T),(int) (Math.floor(D/2)+1),D,ss,(POT_Server[])d_list,true);
-			POT.share_treshold(BigInteger.valueOf(T),(int) (Math.floor(D/2)+1),D,ss,(POT_Server[]) d_list,false);
+			POT.share_threshold(BigInteger.valueOf(T),(int) (Math.floor(D/2)+1),D,ss,(POT_Server[])d_list,true);
+			POT.share_threshold(BigInteger.valueOf(T),(int) (Math.floor(D/2)+1),D,ss,(POT_Server[]) d_list,false);
 			// Alice and bob send treshold to servers
 		}
 		

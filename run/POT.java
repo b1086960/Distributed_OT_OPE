@@ -21,7 +21,7 @@ public class POT {
 	}
 	
 	/** Bob/Alice use this function to share T^A/T^B **/
-	public static void share_treshold(BigInteger value, int k , int D,ShamirSecretSharing ss,POT_Server[] d_list,boolean fromBob) {
+	public static void share_threshold(BigInteger value, int k , int D,ShamirSecretSharing ss,POT_Server[] d_list,boolean fromBob) {
 		BigInteger[][] shares = ss.splitSecret(value, k, D);
 		if(fromBob) { System.out.println(" Bob share treshold "+value);}
 		else { System.out.println(" Alice share treshold "+value);}
@@ -130,8 +130,8 @@ public class POT {
 		// Alice shares prices
 		
 		// Alice and bob send treshold to servers 
-		share_treshold(bobTreshold,k,D,ss,d_list,true);
-		share_treshold(aliceTreshold,k,D,ss,d_list,false);
+		share_threshold(bobTreshold,k,D,ss,d_list,true);
+		share_threshold(aliceTreshold,k,D,ss,d_list,false);
 		// Alice and bob send treshold to servers
 		
 		// Run POT By Using OTK method, since they are both DVV server's 
