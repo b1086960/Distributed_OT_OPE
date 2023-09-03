@@ -16,7 +16,7 @@ Finally, the variable "numberOfTests" is the number of repetitions for each sett
 The results are exported to the folder results, where each experiment's outputs are exported to a separate file, with a name that indicates the name of the protocol, D, N, k (when relevant), and the number of experiment.  
 
 Guidelines for running an MPC protocol in "Multi-Threading" mode:
-Code examples in "Multi-Threading" can be found at folder "run" under file with the protocol name.
+Code examples can be found at folder "run" under file with the protocol name.
 For example for OPE in folder "run" under file "OPE" ( function "main") you can see example of how to run OPE.
 You can change Bob's vector to see how the DVV process works. For example: in the file run/OPE change Bob The legal vector value
 {1,10,100,1000,10000,100000} to illegal one. If you select an illegal vector, for example: {1,10,101,1000,10000,100000}, you will get an error from the DVV process: "validation failed: entry 2 in Bob Vector isent b(n)=b(n-1)*b(2)".
