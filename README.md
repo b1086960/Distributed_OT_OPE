@@ -15,35 +15,20 @@ Similalry, the array "D_arr" has to be filled with the list of desired D values.
 Finally, the variable "numberOfTests" is the number of repetitions for each setting of N and D (as explained in the paper, we run each experiment several times and report the average runtime).
 The results are exported to the folder results, where each experiment's outputs are exported to a separate file, with a name that indicates the name of the protocol, D, N, k (when relevant), and the number of experiment.  
 
-Guidelines for running an MPC protocol in "Multi-Threading" mode:
-Code examples can be found at folder "run" under file with the protocol name.
-For example for OPE in folder "run" under file "OPE" ( function "main") you can see example of how to run OPE.
-You can change Bob's vector to see how the DVV process works. For example: in the file run/OPE change Bob The legal vector value
-{1,10,100,1000,10000,100000} to illegal one. If you select an illegal vector, for example: {1,10,101,1000,10000,100000}, you will get an error from the DVV process: "validation failed: entry 2 in Bob Vector isent b(n)=b(n-1)*b(2)".
+Guidelines for running an MPC protocol in "Multi-Threading" mode: code examples for each protocol can be found in the folder "run" under the file with the protocol's name. E.g., the code example for OPE is given in run/OPE. It is possible to modify there Bob's input vector in order to see how the DVV process works. The vector that is currently specified there is a legal vector --- (1,10,100,1000,10000,100000); one can change it to an illegal vector by changing one of the entries, and then see how the DVV process returns an error message such as "validation failed: entry 2 in Bob Vector isent b(n)=b(n-1)*b(2)".
 
-How to run the code separately for Alice and Bob:
-Since this code simulates each of the protocols it does not separate Alice and Bob Code, and it also add validation to see the protocols works. 
-Here are instructions on how to run each protocol separately for Alice and Bob:
+Next, we specify for each protocol the class of servers that should be run, and the functions that Alice and Bob run;
 
-(1)DSP: Servers: "DSP_Server", Alice use the "share_vector" ("DSP" file, folder "run") to share her vector with the servers, Bob use "share_vector" to share his vector. and "recoverSecretFromservers" ("DSP" file, folder "run") to recover the inner product result.
+(1) DSP: "DSP_Server". Alice and Bob run "share_vector" (run/DSP) to share their vectors with the servers. In addition, Bob runs "recoverSecretFromservers" (run/DSP) to recover the inner product.
 
-(2)OT1: Servers: "OT1_Server", no change for alice and bob.
+(2) OT1: "OT1_Server". No change for Alice and Bob (see DSP above).
 
-(3)OTK: Servers: "OTK_Server", no change for Alice, Bob use "recoverSecretFromkservers" ("OTK" file, folder "run") instead of "recoverSecretFromservers" to recover k secrets.
+(3) OTK: "OTK_Server". No change for Alice. Bob uses "recoverSecretFromkservers" (run/OTK), instead of "recoverSecretFromservers", to recover k secrets.
 
-(4)POT: Servers: "POT_Server", Alice use "share_vector" for her vector, then "share_prices" ("POT" file, folder "run") for her prices, 
-then "share_treshold" ("POT" file, folder "run") for her treshold. Bob use "share_vector" for his vector, then "share_treshold" for his treshold, then "recoverSecretFromkservers" to recover his massages.
+(4) POT: "POT_Server". Alice runs "share_vector" (run/DSP) to share her vector, "share_prices" (run/POT) for her prices, and "share_threshold" (run/POT) to share her threshold. Bob runs "share_vector" (run/DSP) for his vector, then "share_threshold" for his threshold, and "recoverSecretFromkservers" (run/OTK) to recover his massages.
 
-(5)GOT  Servers: "GOT_Server", Alice use "generate_p_and_q" to generate q,p. Then she pick random number S^B (line 210, "GOT" file, folder "run"). Then she share S^A with the servers using "share_secretS" ("GOT" file, folder "run"), then she create shares of S^A according to her access structure using the function "generate_S_keys" ("GOT" file, folder "run"). Lastly she use the functions "encryptedAliceVector" and "AddShares" ("GOT" file, folder "run") to encrypted her vector and add the shares of S^A according to the access structure, and share the result using "share_vector". Bob use "share_vector" for his vector. and then compute the inner product result using "recoverSecretFromkservers". Bob then use "recoverSfromEncryptedVector" ("GOT" file, folder "run") to recover S^B. Bob use "share_secretS" to share S^B with the servers, and "pre_encryption_keys" ("GOT_Server" file, "servers" folder) to tell them to check if S^B==S^A. If S^B==S^A , Bob can get the encryptions keys using "get_encryption_keys" ("GOT" file, folder "run"), and decrypt the result by subtractions (example: line 131, "OTK" file, "run" folder).
+(5) GOT: "GOT_Server". Alice runs "generate_p_and_q" to generate the two primes p and q.  She runs "share_secretS" (run/GOT) to share S^A. Then she creates shares of S^A according to her access structure using the function "generate_S_keys" (run/GOT). Then, she runs the functions "encryptedAliceVector" and "AddShares" to mask her vector and add the shares of S^A according to the access structure. Lastly, she shares the result using "share_vector" (run/DSP). Bob runs "share_vector" (run/DSP) for his vector. and then computes the inner product result using "recoverSecretFromkservers" (run/OTK). Subsequently, Bob runs "recoverSfromEncryptedVector" (run/GOT) to recover S^B. Bob uses "share_secretS" to share S^B with the servers, and "pre_encryption_keys" (servers/GOT_Server) to tell them to check whether S^B==S^A. If S^B==S^A , Bob can get the encryptions keys using "get_encryption_keys" (run/GOT), and decrypt the result.
 
-(6)OPE  Servers: "OPE_Server",   same as "OT1" (different DVV process).
+(6) OPE: "OPE_Server", Alice and Bob as in "OT1" (the only difference is in the DVV process).
 
-(7)OMPE Servers: "OMPE_Server",  same as "OT1" (different DVV process).			  
-				  
-
-
-
-
-
-
-
+(7) OMPE: "OMPE_Server", Alice and Bob as in "OT1" (the only difference is in the DVV process).
